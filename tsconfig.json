@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "skipLibCheck":true, 
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "esNext",
+    "target": "es5",
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "pages/*": ["src/pages/*"],
+      "components/*": ["src/common/components/*"],
+      "assets/*": ["src/common/assets/*"],
+    },
+  },
+  "include": [
+    "./src/**/*",
+    "./script/**/*",
+    "./custom.d.ts"
+  ]
+}
