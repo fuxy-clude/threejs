@@ -52,7 +52,7 @@ module.exports = {
         'css-loader',
       ],
     }, {
-      test: /\.(png|svg|jpg|jpeg|gif|mp3|glb|hdr|fbx|ogg)$/,
+      test: /\.(png|svg|jpg|jpeg|gif|mp3|glb|hdr|fbx|ogg|gltf)$/,
       use: ['file-loader'],
     }, {
       test: /\.(woff|woff2|eot|ttf|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -24,11 +24,13 @@ import 水烟云雾 from './components/水烟云雾'
 import Water from './components/Water'
 import Shader粒子效果 from './components/Shader粒子效果'
 import Fireworks from './components/Fireworks'
+import 修改Three材质源码 from './components/修改Three材质源码'
+import 后期效果 from './components/后期效果'
 
 export default function App() {
   return (
     <div>
-      <Fireworks />
+      <后期效果 />
     </div>
   )
 }
