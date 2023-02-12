@@ -8,6 +8,8 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass';
 import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass';
+import {DotScreenPass} from 'three/examples/jsm/postprocessing/DotScreenPass';
+import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 let oribit: any = null;
 let renderer: Three.WebGL1Renderer;
 export default function Demo03() {
@@ -49,6 +51,11 @@ export default function Demo03() {
     // 合成通道
     const renderPass = new RenderPass(scene, camera);
     effectComposer.addPass(renderPass);
+    // effectComposer.addPass(new DotScreenPass())
+    const bloomPass = new UnrealBloomPass(new Three.Vector2(1,1), 1, 0, 1);
+    renderer.toneMapping = Three.CineonToneMapping;
+    renderer.toneMappingExposure = 1;
+    effectComposer.addPass(bloomPass)
 
     const params = {
         r: 0,
@@ -66,6 +73,12 @@ export default function Demo03() {
             },
             uColor: {
                 value: new Three.Color(params.r, params.g, params.b)
+            },
+            uNormalMap: {
+              value: null
+            },
+            uTime: {
+              value: 0
             }
         },
         vertexShader: `
@@ -79,14 +92,24 @@ export default function Demo03() {
         fragmentShader: `
             varying vec2 vUv;
             uniform sampler2D tDiffuse;
+            uniform sampler2D uNormalMap;
             uniform vec3 uColor;
+            uniform float uTime;
             void main() {
-                vec4 color = texture2D(tDiffuse, vUv);
-                color.rgb += uColor;
+                vec2 newUv = vUv;
+                newUv += sin(newUv.x*5.0+uTime)*0.01;
+                vec4 color = texture2D(tDiffuse, newUv);
+                vec4 normalMapColor = texture2D(uNormalMap, vUv);
+
+                float colorNess = clamp(dot(normalMapColor.rgb, normalize(vec3(-5,5,0))), 0.0, 1.0);
+                color.rgb += colorNess;
                 gl_FragColor = color;
             }
         `
     });
+    const normalMap = new Three.TextureLoader().load(require('./assets/textures/interfaceNormalMap.png'));
+    shaderPass.material.uniforms.uNormalMap.value = normalMap;
+    console.log(normalMap)
 
     const folder = new Dat.GUI().addFolder('颜色后期效果');
     folder.add(params, 'r', -1, 1).onChange(v => {
@@ -109,8 +132,10 @@ export default function Demo03() {
     oribit.enableDamping = true;
     scene.add(axesHelper);
     parentEl.current.appendChild(renderer.domElement);
+    const clock = new Three.Clock();
     const render = () => {
       requestAnimationFrame(render);
+      shaderPass.material.uniforms.uTime.value = clock.getElapsedTime()
       effectComposer.render();
       oribit.update();
     };
