@@ -85,18 +85,18 @@ export default function Demo03() {
       scene.add(glb.scene);
 
       Promise.all([new Three.TextureLoader().loadAsync(require('@/assets/water/Water_1_M_Normal.jpg')),new Three.TextureLoader().loadAsync(require('@/assets/water/Water_2_M_Normal.jpg'))]).then(resp =>{
-        console.log(resp)
-        const water = new Water(new Three.PlaneGeometry(100,100, 1024,1024), {
-            color: '#ff0000',
-            textureHeight: 1024,
-            textureWidth: 1024,
-            normalMap0: resp[0],
-            normalMap1: resp[1]
-        });
-        water.position.y = 1;
-        water.rotation.x = -Math.PI * 0.5;
-        scene.add(water);
-    })
+          console.log(resp)
+          const water = new Water(new Three.PlaneGeometry(100,100, 1024,1024), {
+              color: '#ff0000',
+              textureHeight: 1024,
+              textureWidth: 1024,
+              normalMap0: resp[0],
+              normalMap1: resp[1]
+          });
+          water.position.y = 1;
+          water.rotation.x = -Math.PI * 0.5;
+          scene.add(water);
+      })
     })
 
     window.addEventListener('click', () =>{

@@ -11,7 +11,7 @@ module.exports = {
     hot: true,
     watchContentBase: false,
     liveReload: false,
-    port: 3000,
+    port: 1234,
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
