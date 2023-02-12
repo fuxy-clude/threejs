@@ -53,7 +53,6 @@
     ]
   },
   "devDependencies": {
-    "@hot-loader/react-dom": "^17.0.2",
     "@types/lodash": "^4.14.191",
     "@types/three": "0.137.0",
     "babel-loader": "^8.0.5",
