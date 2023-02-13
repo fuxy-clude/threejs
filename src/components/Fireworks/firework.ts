@@ -76,7 +76,7 @@ export class FireWork {
         this.startPoint = new Three.Points(this.startPointGeometry, this.startPointMaterial);
 
         this.clock = new Three.Clock();
-        // 创建爆炸的烟花
+        // 创建爆炸的烟花1
         this.fireworkGeometry = new Three.BufferGeometry();
         const counts = 180;
         const fireworkPoints = new Float32Array(counts * 3);
