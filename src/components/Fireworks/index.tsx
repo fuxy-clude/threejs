@@ -107,7 +107,7 @@ export default function Demo03() {
       }
       const currentFireWork = new FireWork({
           to: targetPosition,
-          color: `hsl(${Math.floor(Math.random() * 360)},100%,80%)`
+          color: `hsl(${Math.floor(Math.random() * 360)},100%,60%)`
       })
       currentFireWork.addScene(scene);
       fireworkArr.push(currentFireWork)
