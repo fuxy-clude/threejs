@@ -29,11 +29,12 @@ import 后期效果 from './components/后期效果'
 import HTML混合3D渲染 from './components/HTML混合3D渲染'
 import 形变动画 from './components/形变动画'
 import 智慧城市 from './components/智慧城市'
+import 粒子效果 from './components/粒子效果'
 
 export default function App() {
   return (
     <div>
-      <智慧城市 />
+      <粒子效果 />
     </div>
   )
 }
